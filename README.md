@@ -56,13 +56,13 @@ citys = [
 使用递归
 ```coffeeScript
 
-//初始化一个超父级，数据库下所有数据都是它的子级
+#初始化一个超父级，数据库下所有数据都是它的子级
 result = [{value:null,label:'all',children:[]}]
-//定义已转化0条数据
+#定义已转化0条数据
 total = 0
 cl = result
 
-//递归方法
+#递归方法
 getK = (p)->
   for k in p
     for city,index in citys when k.value is city.parent
@@ -70,7 +70,7 @@ getK = (p)->
       total++
     getK(k.children)
 
-//转化条数等于数据库数据总数的时候结束递归
+#转化条数等于数据库数据总数的时候结束递归
 getK(cl) until total == citys.length
 ```
 
