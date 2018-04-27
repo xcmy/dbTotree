@@ -2,7 +2,7 @@
 
 数据库原数据示例
 
-``` coffeeScript
+```coffeeScript
 citys = [
   {
     id:1,
@@ -54,31 +54,30 @@ citys = [
 
 
 使用递归
-``` coffeeScript
+```coffeeScript
 
-## 初始化一个
+//初始化一个超父级，数据库下所有数据都是它的子级
 result = [{value:null,label:'all',children:[]}]
+//定义已转化0条数据
 total = 0
 cl = result
 
+//递归方法
 getK = (p)->
   for k in p
     for city,index in citys when k.value is city.parent
-      k.children.push({
-        value:city.id,
-        label:city.name,
-        children:[]
-      })
+      k.children.push({value:city.id,label:city.name,children:[]})
       total++
     getK(k.children)
 
+//转化条数等于数据库数据总数的时候结束递归
 getK(cl) until total == citys.length
 ```
 
 
 转换后
-``` coffeeScript
-[
+```coffeeScript
+result = [
   {
     "value": 1,
     "label": "中国",
